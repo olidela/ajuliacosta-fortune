@@ -24,11 +24,18 @@ main {
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   text-decoration: none;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 17px;
-  letter-spacing: -0.5px;
+}
+.brand-logo {
+  display: block;
+  width: clamp(170px, 16vw, 250px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 0 rgba(0, 0, 0, 0.12));
+}
+.footer-logo {
+  width: clamp(150px, 12vw, 210px);
 }
 .brand-mark {
   display: grid;

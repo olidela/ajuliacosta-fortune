@@ -93,11 +93,12 @@ function App() {
   return (
     <main>
       <nav className="topbar">
-        <a className="brand" href="#top">
-          <span className="brand-mark">✦</span>
-          <span>
-            ajuliacosta <span className="brand-dot">fortune</span>
-          </span>
+        <a className="brand" href="#top" aria-label="AC Fortune home">
+          <img
+            className="brand-logo"
+            src="/AC%20Fortune.png"
+            alt="AC Fortune logo"
+          />
         </a>
         <div className="nav-links">
           <a href="#diretorio">Mapa da sorte</a>
@@ -224,41 +225,53 @@ function App() {
           </span>
         </div>
         <div className="platform-grid">
-          {filteredPlatforms.map((platform) => (
-            <article
-              className={`platform-card ${platform.featured ? "featured" : ""}`}
-              key={platform.name}
-            >
-              <div className="card-top">
-                <span className="card-number">
-                  {String(platform.number).padStart(3, "0")}
-                </span>
-                <button
-                  className={`favorite ${favorites.includes(platform.name) ? "saved" : ""}`}
-                  onClick={() => toggleFavorite(platform.name)}
-                  aria-label={`Salvar ${platform.name}`}
-                >
-                  {favorites.includes(platform.name) ? "★" : "☆"}
-                </button>
-              </div>
-              <h3>{platform.name}</h3>
-              {platform.featured ? (
-                <>
-                  <span className="status">
-                    <i></i> Link na matéria
+          {filteredPlatforms.map((platform) => {
+            const platformHref = platform.link ?? sourceUrl;
+
+            return (
+              <article
+                className={`platform-card ${platform.featured ? "featured" : ""}`}
+                key={platform.name}
+              >
+                <div className="card-top">
+                  <span className="card-number">
+                    {String(platform.number).padStart(3, "0")}
                   </span>
-                  <div className="card-footer">
-                    <small>Registro {platform.license}</small>
-                    <a href={platform.link} target="_blank" rel="noreferrer">
-                      Abrir link ↗
-                    </a>
-                  </div>
-                </>
-              ) : (
-                <span className="status muted">Nome citado na lista</span>
-              )}
-            </article>
-          ))}
+                  <button
+                    className={`favorite ${favorites.includes(platform.name) ? "saved" : ""}`}
+                    onClick={() => toggleFavorite(platform.name)}
+                    aria-label={`Salvar ${platform.name}`}
+                  >
+                    {favorites.includes(platform.name) ? "★" : "☆"}
+                  </button>
+                </div>
+                <h3>{platform.name}</h3>
+                {platform.featured ? (
+                  <>
+                    <span className="status">
+                      <i></i> Link na matéria
+                    </span>
+                    <div className="card-footer">
+                      <small>Registro {platform.license}</small>
+                      <a href={platformHref} target="_blank" rel="noreferrer">
+                        Abrir link ↗
+                      </a>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span className="status muted">Nome citado na lista</span>
+                    <div className="card-footer">
+                      <small>Fonte da matéria</small>
+                      <a href={platformHref} target="_blank" rel="noreferrer">
+                        Ver na fonte ↗
+                      </a>
+                    </div>
+                  </>
+                )}
+              </article>
+            );
+          })}
         </div>
         {filteredPlatforms.length === 0 && (
           <div className="empty">
@@ -340,10 +353,11 @@ function App() {
       </section>
       <footer>
         <div className="footer-brand">
-          <span className="brand-mark">✦</span>
-          <strong>
-            ajuliacosta <span className="brand-dot">fortune</span>
-          </strong>
+          <img
+            className="brand-logo footer-logo"
+            src="/AC%20Fortune.png"
+            alt="AC Fortune logo"
+          />
         </div>
         <p>
           Diretório informativo independente.
