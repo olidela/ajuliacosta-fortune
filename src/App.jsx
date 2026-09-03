@@ -92,83 +92,41 @@ function App() {
 
   return (
     <main>
-      <nav className="topbar">
-        <a className="brand" href="#top" aria-label="AC Fortune home">
-          <img
-            className="brand-logo"
-            src="/AC%20Fortune.png"
-            alt="AC Fortune logo"
-          />
-        </a>
-        <div className="nav-links">
-          <a href="#diretorio">Mapa da sorte</a>
-          <a href="#sobre">Sobre a fortune</a>
-          <a href="#como-funciona">Como verificar</a>
-        </div>
-        <a
-          className="source-link"
-          href={governmentUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Fonte oficial <span>↗</span>
-        </a>
-      </nav>
       <section className="hero" id="top">
         <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="live-dot"></span> QUEST #01 · ATUALIZADO EM 03 SET
-            2026
+          <div className="hero-brand">
+            <img
+              className="hero-logo"
+              src="/AC%20Fortune.png"
+              alt="AC Fortune logo"
+            />
           </div>
-          <h1>
-            Encontre seu
-            <br />
-            <em>próximo destino</em>
-            <br />
-            de sorte.
-          </h1>
-          <p>
-            O mapa de fortuna com 188 plataformas listadas pela SPA/MF. Explore,
-            salve seus achados e jogue com informação.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#diretorio">
-              Abrir o mapa <span>↓</span>
-            </a>
-            <a
-              className="text-button"
-              href={sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ler a fonte ↗
-            </a>
-          </div>
-        </div>
-        <div className="hero-art">
-          <div className="orbit orbit-one"></div>
-          <div className="orbit orbit-two"></div>
-          <div className="constellation">
-            ✦<span>✧</span>✦
-          </div>
-          <div className="stamp">
-            <strong>188</strong>
-            <span>
-              PORTAIS
+
+          <div className="hero-text">
+            <h1>
+              Encontre seu
               <br />
-              DE FORTUNA
-            </span>
-          </div>
-          <div className="location-pin">✦</div>
-          <div className="hero-note">
-            Sua jornada começa
-            <br />
-            com uma boa escolha.
-          </div>
-          <div className="quest-card">
-            <span>MAPA DA SORTE</span>
-            <strong>01</strong>
-            <small>descobrir · conferir · jogar</small>
+              <em>próximo destino</em>
+              <br />
+              de sorte.
+            </h1>
+            <p>
+              O mapa de fortuna com 188 plataformas listadas pela SPA/MF.
+              Explore, salve seus achados e jogue com informação.
+            </p>
+            <div className="hero-actions">
+              <a className="primary-button" href="#diretorio">
+                Abrir o mapa <span>↓</span>
+              </a>
+              <a
+                className="text-button"
+                href={sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ler a fonte ↗
+              </a>
+            </div>
           </div>
         </div>
       </section>
