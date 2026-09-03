@@ -97,7 +97,7 @@ function App() {
           <div className="hero-brand">
             <img
               className="hero-logo"
-              src="/AC%20Fortune.png"
+              src="/AC-Fortune-optimized.webp"
               alt="AC Fortune logo"
             />
           </div>
@@ -313,7 +313,7 @@ function App() {
         <div className="footer-brand">
           <img
             className="brand-logo footer-logo"
-            src="/AC%20Fortune.png"
+            src="/AC-Fortune-optimized.webp"
             alt="AC Fortune logo"
           />
         </div>
