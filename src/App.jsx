@@ -39,6 +39,7 @@ const linkedPlatforms = {
     "https://gdpzen.com/ir-brasildasorte-legalizadas",
     "0075/2024",
   ],
+  KTO: ["KTO", "https://www.kto.bet.br/", "Site oficial"],
   Líderbet: [
     "Líderbet",
     "https://gdpzen.com/ir-liderbet-legalizadas",
@@ -58,6 +59,8 @@ const platforms = names.map((name, index) => {
     name,
     number: index + 1,
     featured: Boolean(link),
+    premium: name === "Brasil da Sorte",
+    premiumRed: name === "KTO",
     link: link?.[1],
     license: link?.[2],
   };
@@ -188,7 +191,7 @@ function App() {
 
             return (
               <article
-                className={`platform-card ${platform.featured ? "featured" : ""}`}
+                className={`platform-card ${platform.featured ? "featured" : ""} ${platform.premium ? "premium" : ""} ${platform.premiumRed ? "premium-red" : ""}`}
                 key={platform.name}
               >
                 <div className="card-top">
@@ -203,12 +206,12 @@ function App() {
                     {favorites.includes(platform.name) ? "★" : "☆"}
                   </button>
                 </div>
+                {(platform.premium || platform.premiumRed) && (
+                  <span className="premium-badge">Patrocinado</span>
+                )}
                 <h3>{platform.name}</h3>
                 {platform.featured ? (
                   <>
-                    <span className="status">
-                      <i></i> Link na matéria
-                    </span>
                     <div className="card-footer">
                       <small>Registro {platform.license}</small>
                       <a href={platformHref} target="_blank" rel="noreferrer">
@@ -220,7 +223,6 @@ function App() {
                   <>
                     <span className="status muted">Nome citado na lista</span>
                     <div className="card-footer">
-                      <small>Fonte da matéria</small>
                       <a href={platformHref} target="_blank" rel="noreferrer">
                         Ver na fonte ↗
                       </a>
