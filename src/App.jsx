@@ -9,13 +9,13 @@ const usersStorageKey = "ac-fortune-users";
 const sessionStorageKey = "ac-fortune-session";
 
 const names =
-  `Vaidebet|Betpix365|Obabet|JogaJunto|Bra|xx|Tropino|Bz|55W|Ice|Kbet|Nossabet|1xBet|Betcaixa|Megabet|Xbet Caixa|Baú Bingo|Bet do Milhão|Joga Limpo|Energia.bet|MMA|BetVip|Papigames|EsportivaVip|Cbesportes|Donos da Bola|Vert|CGG|Fanbit|Pixbet|Ganheibet|BetdáSorte|Esporte 365|Bet Aki|Jogo de Ouro|MCGames|Play|Montecarlos|Luck.bet|1 Pra 1|Startbet|Meridian|Pin|Multibet|Ricobet|BrxBet|Aposta1|Apostamax|Aviãobet|Bateu Bet|A247|Hilgardo|Hilgardo Gaming|Esportiva Bet|Versusbet|VS - Versus|Betcopa|Brasil da Sorte|Fybet|Bet4|Aposta Bet|Faz o Bet|Blaze|Jonbet|BetWarrior|Dr. Bingo|BetGorillas|BetBuffalos|BetFalcons|Bravo|Tradicional|Apostatudo|BetFast|Faz1Bet|Tivobet|Brazino777|iJogo|Fogo777|P9|9F|6R|Bet.app|BR4Bet|GoldeBet|Lotogreen|Bacanaplay|PlayUZU|Apostou|B1 Bet|BRBet|Reals|Bingo|Betsson|Betgo|Apostar|Big|Bet.bet|DonaldBet|BullsBet|Jogão|Jogos|Líderbet|Geralbet|UpBetBR|9D|WJCasino|7K|Cassino|Vera|Hiperbet|EstrelaBet|Vupi|F12.bet|Luva.bet|Brasil.bet|Bandbet|Megaposta|Rivalo|Stake|Gingabet|QGBet|VivaSorte|Afun|AI|6Z|Sortenabet|Betou|BetFusion|SorteOnline|Lottoland|Tiger.bet|PQ777|5G|BETesporte|LancedeSorte|Supremabet|Maximabet|Ultrabet|CasadeApostas|BetSul|JogoOnline|Vbet|Vivaro|SeuBet|H2 Bet|4Win|4Play|Pagol|ApostaGanha|Receba|bet365|Novibet|Betfair|Sportingbet|Betboo|Betano|EsportesdaSorte|Onabet|Lottu|BetBoom|Oleybet|Pinnacle|Matchbook|BetEspecial|BolsadeAposta|Fulltbet|BetBra|Alfa.bet|ArenaPlus|BingoPlus|BetMGM|MGM|SeguroBet|King Panda|7Games|Betão|R7|Galerabet|KTO|Bet do Oruam|ReidoPitaco|Pitaco|RdP|Sportybet|Betnacional|Superbet|MagicJackpot|Super.bet|Free.bet`.split(
-    "|",
-  ).sort(
-    (firstName, secondName) =>
-      Number(secondName === "Bet do Oruam") -
-      Number(firstName === "Bet do Oruam"),
-  );
+  `Vaidebet|Betpix365|Obabet|JogaJunto|Bra|xx|Tropino|Bz|55W|Ice|Kbet|Nossabet|1xBet|Betcaixa|Megabet|Xbet Caixa|Baú Bingo|Bet do Milhão|Joga Limpo|Energia.bet|MMA|BetVip|Papigames|EsportivaVip|Cbesportes|Donos da Bola|Vert|CGG|Fanbit|Pixbet|Ganheibet|BetdáSorte|Esporte 365|Bet Aki|Jogo de Ouro|MCGames|Play|Montecarlos|Luck.bet|1 Pra 1|Startbet|Meridian|Pin|Multibet|Ricobet|BrxBet|Aposta1|Apostamax|Aviãobet|Bateu Bet|A247|Hilgardo|Hilgardo Gaming|Esportiva Bet|Versusbet|VS - Versus|Betcopa|Brasil da Sorte|Fybet|Bet4|Aposta Bet|Faz o Bet|Blaze|Jonbet|BetWarrior|Dr. Bingo|BetGorillas|BetBuffalos|BetFalcons|Bravo|Tradicional|Apostatudo|BetFast|Faz1Bet|Tivobet|Brazino777|iJogo|Fogo777|P9|9F|6R|Bet.app|BR4Bet|GoldeBet|Lotogreen|Bacanaplay|PlayUZU|Apostou|B1 Bet|BRBet|Reals|Bingo|Betsson|Betgo|Apostar|Big|Bet.bet|DonaldBet|BullsBet|Jogão|Jogos|Líderbet|Geralbet|UpBetBR|9D|WJCasino|7K|Cassino|Vera|Hiperbet|EstrelaBet|Vupi|F12.bet|Luva.bet|Brasil.bet|Bandbet|Megaposta|Rivalo|Stake|Gingabet|QGBet|VivaSorte|Afun|AI|6Z|Sortenabet|Betou|BetFusion|SorteOnline|Lottoland|Tiger.bet|PQ777|5G|BETesporte|LancedeSorte|Supremabet|Maximabet|Ultrabet|CasadeApostas|BetSul|JogoOnline|Vbet|Vivaro|SeuBet|H2 Bet|4Win|4Play|Pagol|ApostaGanha|Receba|bet365|Novibet|Betfair|Sportingbet|Betboo|Betano|EsportesdaSorte|Onabet|Lottu|BetBoom|Oleybet|Pinnacle|Matchbook|BetEspecial|BolsadeAposta|Fulltbet|BetBra|Alfa.bet|ArenaPlus|BingoPlus|BetMGM|MGM|SeguroBet|King Panda|7Games|Betão|R7|Galerabet|KTO|Bet do Oruam|ReidoPitaco|Pitaco|RdP|Sportybet|Betnacional|Superbet|MagicJackpot|Super.bet|Free.bet`
+    .split("|")
+    .sort(
+      (firstName, secondName) =>
+        Number(secondName === "Bet do Oruam") -
+        Number(firstName === "Bet do Oruam"),
+    );
 
 const linkedPlatforms = {
   BR4Bet: ["BR4bet", "https://gdpzen.com/ir-br4bet-legalizadas", "0066/2024"],
