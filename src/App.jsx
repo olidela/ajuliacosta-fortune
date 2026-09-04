@@ -1,14 +1,20 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 const sourceUrl =
   "https://www.gazetadopovo.com.br/conteudo-publicitario/apostas/plataformas-legalizadas/";
 const governmentUrl =
   "https://www.gov.br/fazenda/pt-br/composicao/orgaos/secretaria-de-premios-e-apostas/lista-de-empresas";
+const usersStorageKey = "ac-fortune-users";
+const sessionStorageKey = "ac-fortune-session";
 
 const names =
-  `Vaidebet|Betpix365|Obabet|JogaJunto|Bra|xx|Tropino|Bz|55W|Ice|Kbet|Nossabet|1xBet|Betcaixa|Megabet|Xbet Caixa|Baú Bingo|Bet do Milhão|Joga Limpo|Energia.bet|MMA|BetVip|Papigames|EsportivaVip|Cbesportes|Donos da Bola|Vert|CGG|Fanbit|Pixbet|Ganheibet|BetdáSorte|Esporte 365|Bet Aki|Jogo de Ouro|MCGames|Play|Montecarlos|Luck.bet|1 Pra 1|Startbet|Meridian|Pin|Multibet|Ricobet|BrxBet|Aposta1|Apostamax|Aviãobet|Bateu Bet|A247|Hilgardo|Hilgardo Gaming|Esportiva Bet|Versusbet|VS - Versus|Betcopa|Brasil da Sorte|Fybet|Bet4|Aposta Bet|Faz o Bet|Blaze|Jonbet|BetWarrior|Dr. Bingo|BetGorillas|BetBuffalos|BetFalcons|Bravo|Tradicional|Apostatudo|BetFast|Faz1Bet|Tivobet|Brazino777|iJogo|Fogo777|P9|9F|6R|Bet.app|BR4Bet|GoldeBet|Lotogreen|Bacanaplay|PlayUZU|Apostou|B1 Bet|BRBet|Reals|Bingo|Betsson|Betgo|Apostar|Big|Bet.bet|DonaldBet|BullsBet|Jogão|Jogos|Líderbet|Geralbet|UpBetBR|9D|WJCasino|7K|Cassino|Vera|Hiperbet|EstrelaBet|Vupi|F12.bet|Luva.bet|Brasil.bet|Bandbet|Megaposta|Rivalo|Stake|Gingabet|QGBet|VivaSorte|Afun|AI|6Z|Sortenabet|Betou|BetFusion|SorteOnline|Lottoland|Tiger.bet|PQ777|5G|BETesporte|LancedeSorte|Supremabet|Maximabet|Ultrabet|CasadeApostas|BetSul|JogoOnline|Vbet|Vivaro|SeuBet|H2 Bet|4Win|4Play|Pagol|ApostaGanha|Receba|bet365|Novibet|Betfair|Sportingbet|Betboo|Betano|EsportesdaSorte|Onabet|Lottu|BetBoom|Oleybet|Pinnacle|Matchbook|BetEspecial|BolsadeAposta|Fulltbet|BetBra|Alfa.bet|ArenaPlus|BingoPlus|BetMGM|MGM|SeguroBet|King Panda|7Games|Betão|R7|Galerabet|KTO|ReidoPitaco|Pitaco|RdP|Sportybet|Betnacional|Superbet|MagicJackpot|Super.bet|Free.bet`.split(
+  `Vaidebet|Betpix365|Obabet|JogaJunto|Bra|xx|Tropino|Bz|55W|Ice|Kbet|Nossabet|1xBet|Betcaixa|Megabet|Xbet Caixa|Baú Bingo|Bet do Milhão|Joga Limpo|Energia.bet|MMA|BetVip|Papigames|EsportivaVip|Cbesportes|Donos da Bola|Vert|CGG|Fanbit|Pixbet|Ganheibet|BetdáSorte|Esporte 365|Bet Aki|Jogo de Ouro|MCGames|Play|Montecarlos|Luck.bet|1 Pra 1|Startbet|Meridian|Pin|Multibet|Ricobet|BrxBet|Aposta1|Apostamax|Aviãobet|Bateu Bet|A247|Hilgardo|Hilgardo Gaming|Esportiva Bet|Versusbet|VS - Versus|Betcopa|Brasil da Sorte|Fybet|Bet4|Aposta Bet|Faz o Bet|Blaze|Jonbet|BetWarrior|Dr. Bingo|BetGorillas|BetBuffalos|BetFalcons|Bravo|Tradicional|Apostatudo|BetFast|Faz1Bet|Tivobet|Brazino777|iJogo|Fogo777|P9|9F|6R|Bet.app|BR4Bet|GoldeBet|Lotogreen|Bacanaplay|PlayUZU|Apostou|B1 Bet|BRBet|Reals|Bingo|Betsson|Betgo|Apostar|Big|Bet.bet|DonaldBet|BullsBet|Jogão|Jogos|Líderbet|Geralbet|UpBetBR|9D|WJCasino|7K|Cassino|Vera|Hiperbet|EstrelaBet|Vupi|F12.bet|Luva.bet|Brasil.bet|Bandbet|Megaposta|Rivalo|Stake|Gingabet|QGBet|VivaSorte|Afun|AI|6Z|Sortenabet|Betou|BetFusion|SorteOnline|Lottoland|Tiger.bet|PQ777|5G|BETesporte|LancedeSorte|Supremabet|Maximabet|Ultrabet|CasadeApostas|BetSul|JogoOnline|Vbet|Vivaro|SeuBet|H2 Bet|4Win|4Play|Pagol|ApostaGanha|Receba|bet365|Novibet|Betfair|Sportingbet|Betboo|Betano|EsportesdaSorte|Onabet|Lottu|BetBoom|Oleybet|Pinnacle|Matchbook|BetEspecial|BolsadeAposta|Fulltbet|BetBra|Alfa.bet|ArenaPlus|BingoPlus|BetMGM|MGM|SeguroBet|King Panda|7Games|Betão|R7|Galerabet|KTO|Bet do Oruam|ReidoPitaco|Pitaco|RdP|Sportybet|Betnacional|Superbet|MagicJackpot|Super.bet|Free.bet`.split(
     "|",
+  ).sort(
+    (firstName, secondName) =>
+      Number(secondName === "Bet do Oruam") -
+      Number(firstName === "Bet do Oruam"),
   );
 
 const linkedPlatforms = {
@@ -40,6 +46,7 @@ const linkedPlatforms = {
     "0075/2024",
   ],
   KTO: ["KTO", "https://www.kto.bet.br/", "Site oficial"],
+  "Bet do Oruam": ["Bet do Oruam", "https://123rior.vip/", "Site oficial"],
   Líderbet: [
     "Líderbet",
     "https://gdpzen.com/ir-liderbet-legalizadas",
@@ -60,7 +67,7 @@ const platforms = names.map((name, index) => {
     number: index + 1,
     featured: Boolean(link),
     premium: name === "Brasil da Sorte",
-    premiumRed: name === "KTO",
+    premiumRed: name === "KTO" || name === "Bet do Oruam",
     link: link?.[1],
     license: link?.[2],
   };
@@ -70,6 +77,36 @@ function App() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("all");
   const [favorites, setFavorites] = useState([]);
+  const [account, setAccount] = useState(null);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState("login");
+  const [authForm, setAuthForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [authError, setAuthError] = useState("");
+
+  useEffect(() => {
+    const savedSession = localStorage.getItem(sessionStorageKey);
+    if (!savedSession) return;
+
+    const session = JSON.parse(savedSession);
+    setAccount(session);
+    setFavorites(session.favorites ?? []);
+  }, []);
+
+  useEffect(() => {
+    if (!account) return;
+
+    const users = JSON.parse(localStorage.getItem(usersStorageKey) ?? "{}");
+    users[account.email] = { ...users[account.email], favorites };
+    localStorage.setItem(usersStorageKey, JSON.stringify(users));
+    localStorage.setItem(
+      sessionStorageKey,
+      JSON.stringify({ ...account, favorites }),
+    );
+  }, [account, favorites]);
 
   const filteredPlatforms = useMemo(
     () =>
@@ -87,11 +124,64 @@ function App() {
   );
 
   const toggleFavorite = (name) =>
-    setFavorites((current) =>
-      current.includes(name)
-        ? current.filter((item) => item !== name)
-        : [...current, name],
-    );
+    account
+      ? setFavorites((current) =>
+          current.includes(name)
+            ? current.filter((item) => item !== name)
+            : [...current, name],
+        )
+      : (setAuthMode("login"), setAuthOpen(true));
+
+  const openAuth = (mode) => {
+    setAuthMode(mode);
+    setAuthError("");
+    setAuthOpen(true);
+  };
+
+  const handleAuthSubmit = (event) => {
+    event.preventDefault();
+    const email = authForm.email.trim().toLowerCase();
+    const users = JSON.parse(localStorage.getItem(usersStorageKey) ?? "{}");
+
+    if (!email || !authForm.password) {
+      setAuthError("Informe e-mail e senha.");
+      return;
+    }
+
+    if (authMode === "register") {
+      if (!authForm.name.trim()) {
+        setAuthError("Informe seu nome.");
+        return;
+      }
+      if (users[email]) {
+        setAuthError("Este e-mail já possui uma conta.");
+        return;
+      }
+      users[email] = {
+        name: authForm.name.trim(),
+        password: authForm.password,
+        favorites: [],
+      };
+      localStorage.setItem(usersStorageKey, JSON.stringify(users));
+    } else if (!users[email] || users[email].password !== authForm.password) {
+      setAuthError("E-mail ou senha incorretos.");
+      return;
+    }
+
+    const user = users[email];
+    setAccount({ name: user.name, email });
+    setFavorites(user.favorites ?? []);
+    setAuthForm({ name: "", email: "", password: "" });
+    setAuthError("");
+    setAuthOpen(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem(sessionStorageKey);
+    setAccount(null);
+    setFavorites([]);
+    setFilter("all");
+  };
 
   return (
     <main>
@@ -147,6 +237,26 @@ function App() {
             Busque por nome, filtre os portais com link e salve seus achados
             para consultar depois.
           </p>
+        </div>
+        <div className="account-bar">
+          {account ? (
+            <div className="account-signed-in">
+              <span>Olá, {account.name}</span>
+              <button className="account-button subtle" onClick={logout}>
+                Sair
+              </button>
+            </div>
+          ) : (
+            <>
+              <span>Salve suas bets favoritas em uma conta.</span>
+              <button
+                className="account-button"
+                onClick={() => openAuth("login")}
+              >
+                Entrar
+              </button>
+            </>
+          )}
         </div>
         <div className="controls">
           <label className="search">
@@ -222,11 +332,6 @@ function App() {
                 ) : (
                   <>
                     <span className="status muted">Nome citado na lista</span>
-                    <div className="card-footer">
-                      <a href={platformHref} target="_blank" rel="noreferrer">
-                        Ver na fonte ↗
-                      </a>
-                    </div>
                   </>
                 )}
               </article>
@@ -336,6 +441,83 @@ function App() {
           Fonte e metodologia ↗
         </a>
       </footer>
+      {authOpen && (
+        <div className="auth-backdrop" onClick={() => setAuthOpen(false)}>
+          <section
+            className="auth-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="auth-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="auth-close"
+              onClick={() => setAuthOpen(false)}
+              aria-label="Fechar janela de acesso"
+            >
+              ×
+            </button>
+            <div className="eyebrow">ÁREA DO USUÁRIO</div>
+            <h2 id="auth-title">
+              {authMode === "login" ? "Entre para salvar." : "Crie seu acesso."}
+            </h2>
+            <p>Suas bets favoritas ficam salvas neste navegador.</p>
+            <form onSubmit={handleAuthSubmit}>
+              {authMode === "register" && (
+                <label>
+                  Nome
+                  <input
+                    value={authForm.name}
+                    onChange={(event) =>
+                      setAuthForm({ ...authForm, name: event.target.value })
+                    }
+                    autoComplete="name"
+                  />
+                </label>
+              )}
+              <label>
+                E-mail
+                <input
+                  type="email"
+                  value={authForm.email}
+                  onChange={(event) =>
+                    setAuthForm({ ...authForm, email: event.target.value })
+                  }
+                  autoComplete="email"
+                />
+              </label>
+              <label>
+                Senha
+                <input
+                  type="password"
+                  value={authForm.password}
+                  onChange={(event) =>
+                    setAuthForm({ ...authForm, password: event.target.value })
+                  }
+                  autoComplete={
+                    authMode === "login" ? "current-password" : "new-password"
+                  }
+                />
+              </label>
+              {authError && <span className="auth-error">{authError}</span>}
+              <button className="primary-button auth-submit" type="submit">
+                {authMode === "login" ? "Entrar" : "Criar conta"}
+              </button>
+            </form>
+            <button
+              className="auth-switch"
+              onClick={() => {
+                setAuthMode(authMode === "login" ? "register" : "login");
+                setAuthError("");
+              }}
+            >
+              {authMode === "login"
+                ? "Ainda não tenho conta"
+                : "Já tenho uma conta"}
+            </button>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
